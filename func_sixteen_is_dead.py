@@ -14,7 +14,8 @@ def points_result(pts):
     return ptsresult
 
 def turn(player):
-    while pointslist[0] < 16:
+    end_game = False
+    while pointslist[player-1] < 16:
         print("Spieler " + str(player) + " ist am Zug")
         print("Drücken sie Return um erneut zu würfeln.")
         print("Drücken sie n um den Knobelbecher weiterzurreichen")
@@ -26,7 +27,8 @@ def turn(player):
 
             pointslist[player - 1] = points_result(pointslist[player-1])
         elif(usrinput == "x"):
-            pass
+            end_game= True
+            break
 
         if(pointslist[player-1] == 9):
             print("Sie haben 9 Punkte erreicht. Leider darf nicht mehr weitergewürfelt werden")
@@ -36,12 +38,15 @@ def turn(player):
             print("Sie haben 10 Punkte erreicht, das heißt es muss noch einmal gewürfelt werden")
             time.sleep(3)
             pointslist[player - 1] = points_result(pointslist[player-1])
+    if (end_game):
+        return 2
     if(pointslist[player-1] >= 16):
         print(pointslist[player-1])
         print("Spieler " + str(player) + " hat die Punktzahlgrenze überschritten")
-        return False
+        return 0
+
     else:
-        return True
+        return 1
 
 
 
@@ -51,9 +56,13 @@ def sixteen_is_dead(players):
     defloser = False
     pointslist = [0] * players
     for i in range(1,players+1):
-        if(not turn(i)):
+        x = turn(i)
+        if(x == 0):
             print("Spieler " + str(i) + " hat verloren")
             defloser = True
+            break
+        elif(x == 2):
+            print("Sie haben das Spiel beendet")
             break
     print("Punkteliste: ")
     for x in range(1,len(pointslist)+1):
@@ -66,14 +75,17 @@ def sixteen_is_dead(players):
                 min = pointslist[x-1]
                 minpos = x-1
         print("Spieler " + str(minpos + 1) + " hat verloren")
+    newgame = ""
+    newgame = input("Möchten sie ein neues Spiel beginnen?")
 
+    if(newgame == "y"):
+            menu()
 
+def menu():
+    playercount = int(input("Bitte geben sie eine beliebige Spieleranzahl > 0 ein: "))
+    sixteen_is_dead(playercount)
 
-
-
-sixteen_is_dead(2)
-
-
+menu()
 
 
 
