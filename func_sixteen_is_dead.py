@@ -41,7 +41,6 @@ def turn(player):
     if (end_game):
         return 2
     if(pointslist[player-1] >= 16):
-        print(pointslist[player-1])
         print("Spieler " + str(player) + " hat die Punktzahlgrenze überschritten")
         return 0
 
@@ -75,6 +74,7 @@ def sixteen_is_dead(players):
                 min = pointslist[x-1]
                 minpos = x-1
         print("Spieler " + str(minpos + 1) + " hat verloren")
+    #Todo: Mehrere verlierer möglich machen.
     newgame = ""
     newgame = input("Möchten sie ein neues Spiel beginnen?")
 
