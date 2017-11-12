@@ -39,6 +39,9 @@ def turn(player):
             time.sleep(3)
             pointslist[player - 1] = points_result(pointslist[player-1])
             break
+            #with the break here, the player has to roll exactly once more, right?
+            #I don't know about the rule set, but I think the idea is to force the
+            #player once more and then let him decide again about further dice rolls
     if (end_game):
         return 2
     if(pointslist[player-1] >= 16):
@@ -69,25 +72,32 @@ def sixteen_is_dead(players):
         print("Spieler " + str(x) + " hat " + str(pointslist[x-1]) + " Punkte erreicht" )
     min = 100
     minpos = 0
+    minposlist = [minpos]
     if(not defloser):
         for x in range(1,len(pointslist)+1):
             if pointslist[x-1] < min:
                 min = pointslist[x-1]
                 minpos = x-1
-        print("Spieler " + str(minpos + 1) + " hat verloren")
-    #Todo: Mehrere verlierer möglich machen.
+                minposlist = [minpos]
+            if pointslist[x-1] == min:
+                minposlist.append(x-1)
+        for x in range(1, len(minposlist)): #multiple losers
+            print("Spieler " + str(minposlist[x] + 1) + " hat verloren")
+    
     newgame = ""
-    newgame = input("Möchten sie ein neues Spiel beginnen?")
+    newgame = input("Möchten sie ein neues Spiel beginnen? Geben Sie dazu y und Return ein.") #entered desired input
 
     if(newgame == "y"):
             menu()
 
 def menu():
-    playercount = int(input("Bitte geben sie eine beliebige Spieleranzahl > 0 ein: "))
-    sixteen_is_dead(playercount)
+    playercount = (input("Bitte geben sie eine beliebige Spieleranzahl > 0 ein: "))
+      
+    if playercount.isdigit()and playercount != '0': #added check for valid number
+        playercount = int(playercount)
+        sixteen_is_dead(playercount)
 
 menu()
-
 
 
 
