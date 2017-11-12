@@ -1,4 +1,4 @@
-__author__ = "6611082: Cedric Reuter"
+__author__ = "6611082: Cedric Reuter, 6317302: Fabian Eichner"
 import func_roll_dice
 import time
 global pointslist
@@ -85,22 +85,19 @@ def sixteen_is_dead(players):
             print("Spieler " + str(minposlist[x] + 1) + " hat verloren")
     
     newgame = ""
-    newgame = input("Möchten sie ein neues Spiel beginnen? Geben Sie dazu y und Return ein.") #entered desired input
+    newgame = input("Möchten Sie ein neues Spiel beginnen? Geben Sie dazu y ein und drücken Sie Return.") #entered desired input
 
     if(newgame == "y"):
             menu()
 
 def menu():
-    playercount = (input("Bitte geben sie eine beliebige Spieleranzahl > 0 ein: "))
+    playercount = (input("Bitte geben Sie eine beliebige Spieleranzahl > 0 ein: "))
       
     if playercount.isdigit()and playercount != '0': #added check for valid number
         playercount = int(playercount)
         sixteen_is_dead(playercount)
 
 menu()
-
-
-
 
 
 
