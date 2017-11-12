@@ -38,7 +38,6 @@ def turn(player):
             print("Sie haben 10 Punkte erreicht, das heißt es muss noch einmal gewürfelt werden")
             time.sleep(3)
             pointslist[player - 1] = points_result(pointslist[player-1])
-            break
             #with the break here, the player has to roll exactly once more, right?
             #I don't know about the rule set, but I think the idea is to force the
             #player once more and then let him decide again about further dice rolls
