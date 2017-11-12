@@ -1,4 +1,4 @@
-__author__ = "6317302: Fabian Eichner"
+__author__ = "6611082: Cedric Reuter, 6317302: Fabian Eichner"
 
 
 # EPR_03
