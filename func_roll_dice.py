@@ -22,5 +22,3 @@ def roll_dice(number=1, faces=6, seed=None):
             print('ERROR')
     else:
         print('ERROR')
-
-

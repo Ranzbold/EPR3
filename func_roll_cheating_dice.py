@@ -25,7 +25,3 @@ def roll_cheating_dice(number=1, seed=None):
             print('ERROR')
     else:
         print('ERROR')
-
-
-out = roll_cheating_dice(3, None)
-print(out)
