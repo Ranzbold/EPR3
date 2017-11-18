@@ -1,21 +1,23 @@
-__author__ = "6611082: Cedric Reuter, 6317302: Fabian Eichner"
-
 """In the following, the gameflow for the game sixteen_is_dead is presented.
 This game lets the players' roll a dice and counts the results. The goal of the
 game is to come as close to the cumulative count of 16 as possible. If the count
-of 16 is reached or exceeded, however, the player loses. The following code is 
+of 16 is reached or exceeded, however, the player loses. The following code was
 required for EPR_03, exercises 3.3c), 3.4 and 3.5."""
 
 import func_roll_dice
 import time
-global pointslist
 
+__author__ = "6611082: Cedric Reuter, 6317302: Fabian Eichner"
+__copyright__ = "Copyright 2017/2018 – EPR-Goethe-Uni" 
+__credits__ = " "
+__email__ = " "
 
 
 def points_result(pts):
     """points_result calls on func_dice_roll to execute a dice roll, prints out
     the result and returns the player's updated point count. Input argument has
     to be a list element containing an integer, output is an integer."""
+    
     pts = int(pts)
     result = int(func_roll_dice.roll_dice(1, 6, None))
     print("Sie haben eine " + str(result) + " gewürfelt")
@@ -23,15 +25,16 @@ def points_result(pts):
     print("Sie haben nun: " + str(ptsresult) + " Punkte")
     return ptsresult
 
-def turn(player):
+def turn(player, player_points):
     """turn instructs the player and receives the player's input. The player has
     the choice to execute a dice roll (in which case points_result is called),
     pass over to the next player or end the game. turn also incorporates the
     exceptional rules that apply to the pointcount of 9 or 10 points. turn
     receives an input integer denoting the active player and returns an integer
     denoting the player's decision"""
+    
     end_game = False
-    while pointslist[player-1] < 16:
+    while player_points < 16:
         print("Spieler " + str(player) + " ist am Zug")
         print("Drücken sie Return um erneut zu würfeln.")
         print("Drücken sie n um den Knobelbecher weiterzurreichen")
@@ -41,30 +44,30 @@ def turn(player):
             break
         
         elif(usrinput == ""):
-            pointslist[player - 1] = points_result(pointslist[player-1])
+            player_points = points_result(player_points)
             
         elif(usrinput == "x"):
             end_game= True
             break
 
-        if(pointslist[player-1] == 9):
+        if(player_points == 9):
             print("Sie haben 9 Punkte erreicht. Leider darf nicht mehr weitergewürfelt werden")
             break
 
-        if(pointslist[player-1] == 10):
+        if(player_points == 10):
             print("Sie haben 10 Punkte erreicht, das heißt es muss noch einmal gewürfelt werden")
             time.sleep(3)
-            pointslist[player - 1] = points_result(pointslist[player-1])
-
+            player_points = points_result(player_points)
+            
     if (end_game):
-        return 2
+        return (2, player_points)
     
-    if(pointslist[player-1] >= 16):
+    if(player_points >= 16):
         print("Spieler " + str(player) + " hat die Punktzahlgrenze überschritten")
-        return 0
+        return (0, player_points)
 
     else:
-        return 1
+        return (1, player_points)
 
 
 
@@ -75,11 +78,11 @@ def sixteen_is_dead(players):
     prints out the players' point counts, determines the loser(s). Then it
     offers to start anew. sixteen_is_dead receives the number of players as
     input."""
-    global pointslist
+    
     defloser = False
     pointslist = [0] * players
     for i in range(1,players+1):
-        x = turn(i)
+        [x, pointslist[i-1]] = turn(i, pointslist[i-1])
         if(x == 0):
             print("Spieler " + str(i) + " hat verloren")
             defloser = True
@@ -113,6 +116,7 @@ def sixteen_is_dead(players):
 def menu():
     """menu asks for the number of players and the initiates sixteen_is_dead to
     start the game."""
+    
     playercount = (input("Bitte geben Sie eine beliebige Spieleranzahl > 0 ein: "))
       
     if playercount.isdigit()and playercount != '0': 
