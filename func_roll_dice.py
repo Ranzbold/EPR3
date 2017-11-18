@@ -1,5 +1,11 @@
-__author__ = "6611082: Cedric Reuter, 6317302: Fabian Eichner"
+"""Produce a dice roll."""
 
+import random
+
+__author__ = "6611082: Cedric Reuter, 6317302: Fabian Eichner"
+__copyright__ = "Copyright 2017/2018 – EPR-Goethe-Uni" 
+__credits__ = " " 
+__email__ = " " 
 
 # EPR_03
 
@@ -8,8 +14,7 @@ def roll_dice(number=1, faces=6, seed=None):
     specified in the input variable number and possible results determined by \
     the range between 1 and input variable faces. Allowed range of number is \
     [1, 10] and faces [2, 100]"""
-    import random
-
+    
     if type(number) == int and type(faces) == int:
         if 1 <= number <= 10 and 2 <= faces <= 100:
             result = []
