@@ -1,5 +1,11 @@
-__author__ = "6611082: Cedric Reuter, 6317302: Fabian Eichner"
+"""Produce a dice roll with an increased chance of rolling a '3'."""
 
+import random
+
+__author__ = "6611082: Cedric Reuter, 6317302: Fabian Eichner"
+__copyright__ = "Copyright 2017/2018 – EPR-Goethe-Uni" 
+__credits__ = " " 
+__email__ = " " 
 
 # EPR_03
 
@@ -9,7 +15,7 @@ def roll_cheating_dice(number=1, seed=None):
     the range between 1 and input variable faces. Allowed range of number is \
     [1, 10]. The probability of obtaining a 3 with the dice roll is doubled \
     compared to the other possible outcomes"""
-    import random
+    
 
     if type(number) == int:
         if 1 <= number <= 10:
@@ -25,3 +31,7 @@ def roll_cheating_dice(number=1, seed=None):
             print('ERROR')
     else:
         print('ERROR')
+
+
+out = roll_cheating_dice(3, None)
+print(out)
