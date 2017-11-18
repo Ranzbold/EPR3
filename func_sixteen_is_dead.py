@@ -71,7 +71,7 @@ def turn(player, player_points):
             print("Sie haben 10 Punkte erreicht,"
                   "das heißt es muss noch einmal gewürfelt werden")
             time.sleep(3)
-            player_points = points_result(player_points)
+            player_points = points_result(player_points,False)
             
     if (end_game):
         return (2, player_points)
